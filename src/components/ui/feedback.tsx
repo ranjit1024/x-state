@@ -30,7 +30,7 @@ export default function FeedbackButton() {
       {/* Modal */}
       {open && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
-          <div className="bg-white w-[320px] p-6 rounded-2xl shadow-xl space-y-4">
+          <div className="bg-white w-lg p-6 rounded-2xl shadow-xl space-y-4">
             
             {/* Step 1 */}
             {!feedback && (
