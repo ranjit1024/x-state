@@ -5,10 +5,12 @@ import { Textarea } from "./components/ui/textarea";
 import  {useActorRef, useSelector} from "@xstate/react";
 import { countLogic } from "./state";
 import { Button } from "./components/ui/button";
+import { promiseLogic } from "./state";
 export function App() {
+  const promiseRef = useActorRef(promiseLogic);
   const  counterRef = useActorRef(countLogic)
   const count = useSelector(counterRef, (state)=> state.context.count)
-  
+  const promiseData = useSelector(promiseRef, (state)=> state.output)
   return (
     <div className="container mx-auto p-8 text-center relative z-10">
  
@@ -22,6 +24,7 @@ export function App() {
       <Button onClick={()=> counterRef.send({'type':'dec'})}> Decrement </Button>
       </div>
       <h2 className="text-3xl font-medium mt-3">Count: {count}</h2>
+      <h2 className="text-3xl font-medium mt-3">Promise: {promiseData}</h2>
     </div>
   );
 }
