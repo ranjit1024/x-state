@@ -7,8 +7,10 @@ import { countLogic } from "./state";
 import { Button } from "./components/ui/button";
 import { promiseLogic } from "./state";
 import FeedbackButton from "./components/ui/feedback";
+import { createBrowserInspector } from "@statelyai/inspect";
 export function App() {
   const promiseRef = useActorRef(promiseLogic);
+  createBrowserInspector 
   const  counterRef = useActorRef(countLogic)
   const count = useSelector(counterRef, (state)=> state.context.count)
   const promiseData = useSelector(promiseRef, (state)=> state.output)

@@ -1,3 +1,6 @@
+import { Value } from "@radix-ui/react-select";
+import { feedBackMachine } from "../../../src/state/feedBack";
+import { useMachine } from "@xstate/react";
 import React, { useState } from "react";
 
 type FeedbackType = "good" | "bad" | null;
@@ -7,7 +10,7 @@ export default function FeedbackButton() {
   const [feedback, setFeedback] = useState<FeedbackType>(null);
   const [text, setText] = useState("");
   const [submitted, setSubmitted] = useState(false);
-
+  const [state, send] = useMachine(feedBackMachine)
   const reset = () => {
     setFeedback(null);
     setText("");
@@ -75,11 +78,13 @@ export default function FeedbackButton() {
                   What can we improve?
                 </h3>
                 <textarea
-                  value={text}
-                  onChange={(e) => setText(e.target.value)}
+                  value={state.context.feedback}
+                  onChange={(e) => {
+                     send({"type": 'feedback.update',feedBack:e.target.value})
+                  }}
                   rows={4}
                   className="w-full border rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-black"
-                  placeholder="Tell us what went wrong..."
+                //   placeholder="Tell us what went wrong..."
                 />
                 <button
                   onClick={() => {
