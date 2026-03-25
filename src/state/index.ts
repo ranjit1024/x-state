@@ -11,9 +11,9 @@ export const countLogic = fromTransition((state:any, event)=>{
 }, {count:0});
 
 export const promiseLogic = fromPromise(async()=>{
-    const result:Promise<String>  = new Promise((res)=> setTimeout(() => {
-        res;
-        return "working"
-    }, 1000))
+    const result = await new Promise<string>((res)=> setTimeout(() => {
+        res("done")
+        
+    }, 2000))
     return result;
 })

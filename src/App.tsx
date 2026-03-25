@@ -6,13 +6,14 @@ import  {useActorRef, useSelector} from "@xstate/react";
 import { countLogic } from "./state";
 import { Button } from "./components/ui/button";
 import { promiseLogic } from "./state";
+import FeedbackButton from "./components/ui/feedback";
 export function App() {
   const promiseRef = useActorRef(promiseLogic);
   const  counterRef = useActorRef(countLogic)
   const count = useSelector(counterRef, (state)=> state.context.count)
   const promiseData = useSelector(promiseRef, (state)=> state.output)
   return (
-    <div className="container mx-auto p-8 text-center relative z-10">
+    <div className="container font-mono mx-auto p-8 text-center relative z-10">
  
       <div className=" bg-gray-100 shadow rounded-xl px-8  py-4">
         <CardHeader className="text-xl">Hello</CardHeader>
@@ -25,6 +26,9 @@ export function App() {
       </div>
       <h2 className="text-3xl font-medium mt-3">Count: {count}</h2>
       <h2 className="text-3xl font-medium mt-3">Promise: {promiseData}</h2>
+      <div className="mt-2">
+      <FeedbackButton />
+      </div>
     </div>
   );
 }
