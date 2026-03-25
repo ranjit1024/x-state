@@ -4,6 +4,9 @@ export const countLogic = fromTransition((state:any, event)=>{
     if(event.type === "inc"){
         return {  count : state.count + 1}
     }
+    if(event.type === 'dec'){
+        return {count: state.count - 1}
+    }
     return state;
 }, {count:0});
 
